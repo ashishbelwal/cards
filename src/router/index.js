@@ -1,14 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Index from '../views/Index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect:"/index",
+    name: 'Index',
+    component: Index,
+    children: [
+      {
+        path: "",
+        name: "Cards",
+        component: () => import("@/views/Cards"),
+      },
+      {
+        path: "/home",
+        name: "Home",
+        component: () => import("@/views/Home"),
+      },
+      {
+        path: "/payments",
+        name: "Payments",
+        component: () => import("@/views/Payments"),
+      },
+      {
+        path: "/credit",
+        name: "Credit",
+        component: () => import("@/views/Credit"),
+      },
+      {
+        path: "/settings",
+        name: "Settings",
+        component: () => import("@/views/Settings"),
+      },
+      {
+        path: "/newCard",
+        name: "AddNewCard",
+        component: () => import("@/components/AddNewCard"),
+      },
+      
+    ],
   },
   {
     path: '/about',

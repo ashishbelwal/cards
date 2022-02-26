@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <PageTitle>
-      <h1>Home</h1>
+      <h1>Credit</h1>
     </PageTitle>
   </div>
 </template>
@@ -10,7 +10,7 @@
 import PageTitle from "./sections/PageTitle.vue";
 
   export default {
-    name: 'Home',
+    name: 'Credit',
 
     components: {
     PageTitle
