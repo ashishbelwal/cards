@@ -116,4 +116,12 @@
           padding: 0
       }
   }
+  @media only screen and (max-width: 768px){
+      form{
+        position: absolute;
+        width: 100%;
+        padding: 20px;
+        top: 50%;
+      }
+  }
 </style>

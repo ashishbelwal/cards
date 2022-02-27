@@ -4,20 +4,20 @@
             <v-row>
                 <div class="showCardBtn">
                         <template v-if = "showCard">
-                            <v-btn depressed plain>
+                            <v-btn depressed plain @click="showCard = !showCard">
                                 <img src="../assets/remove_red_eye-24px-1.svg" alt="">
                                 Show card number
                             </v-btn>
                         </template>
                         <template v-else>
-                            <v-btn depressed plain>
+                            <v-btn depressed plain @click="showCard = !showCard">
                                 <img src="../assets/remove_red_eye-24px-1.svg" alt="">
                                 Hide card number
                             </v-btn>
                         </template>
                     </div>
                 <div class="cardSider">
-                    <v-carousel :show-arrows="false" @change="currentIndex = allCards[$event].id">
+                    <v-carousel :show-arrows="false" ref="carousel" @change="currentIndex = allCards[$event].id">
                         <v-carousel-item
                         v-for="(card,i) in allCards"
                         :key="i"
@@ -30,7 +30,12 @@
                                     <h3>{{card.name}}</h3>
                                 </div>
                                 <div class="cardNumber">
-                                    <h3 v-if = "!showCard">{{card.cardNumber}}</h3>
+                                    <h3 v-if = "!showCard">
+                                        <span>{{card.cardNumber.split(" ")[0]}}</span>
+                                        <span>{{card.cardNumber.split(" ")[1]}}</span>
+                                        <span>{{card.cardNumber.split(" ")[2]}}</span>
+                                        <span>{{card.cardNumber.split(" ")[3]}}</span>
+                                    </h3>
                                     <h3 v-else>
                                         <span>
                                             <svg viewBox="0 0 9 9" version="1.1"
@@ -106,9 +111,13 @@
         <v-container>
             <v-row>
                 <div class="actionWrapper">
-                     <button v-on:click="freezeCard">
+                     <button v-on:click="freezeCard" v-if="allCards.length>0">
                         <img src="../assets/Freeze card.svg" alt="">
-                        <p> Freeze card </p>
+                        <template v-if="allCards.find(x => x.id == currentIndex)">
+                            <p v-if="allCards.find(x => x.id == currentIndex).freeze == false"> Freeze card </p>
+                            <p v-else> Unfreeze card</p>
+                        </template>
+                        
                     </button>
 
                     <button>
@@ -164,9 +173,18 @@
         data: () => ({
             showCard: true,
             overlay: false,
-            isFreeze: false
+            isFreeze: false,
+            currentIndex: 0
         }),
-        computed: mapGetters(["allCards"]),
+        computed: {
+            ...mapGetters(["allCards"]),
+            
+        },
+        watch:{
+            currentIndex: function(){
+                return this.allCards[0].id;
+            }
+        },
         methods: {
             ...mapActions(["freeze", "deleteCard"]),
             freezeCard(){
@@ -175,6 +193,7 @@
             cancelCard(){
                 this.deleteCard(this.currentIndex);
                 this.overlay = false;
+                
             }
         }
     }
@@ -286,6 +305,7 @@
                     color: #fff;
                     font-weight: 700;
                     margin-bottom: 0;
+                    letter-spacing: 2px;
                 }
                 span{
                     margin-right: 27px;
@@ -329,6 +349,14 @@
     @media only screen and (max-width: 768px){
         .cardSider .v-carousel {
             height: 332px !important;
+        }
+        .cardActions{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            z-index: 9;
+            top: calc(100vh - 240px);
+            padding-bottom: 30px;
         }
     }
     

@@ -19,5 +19,9 @@
 <style lang="scss">
   .pageTitle{
     margin-top: 40px;
+    @media only screen and (max-width: 768px){
+      color: #fff;
+      margin-left: 16px;
+    }
   }
 </style>

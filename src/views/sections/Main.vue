@@ -21,7 +21,7 @@
     }
     @media only screen and (max-width: 768px){
       .contentWrapper{
-        padding: 0px 16px!important;
+        padding: 0px 0px!important;
         background: #0C365A;
       }
     }

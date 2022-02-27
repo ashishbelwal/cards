@@ -8,7 +8,7 @@
                     <CardSlider />
 
                 </v-col>
-                <v-col cols="12" md="6" style="padding-top: 22px;">
+                <v-col cols="12" md="6" style="padding-top: 22px;" class="mobileView">
                     <CardDetails />
                     <RecentTransaction />
                 </v-col>
@@ -39,6 +39,15 @@ import RecentTransaction from "./RecentTransaction.vue";
             img{
                 margin-right: 6px;
             }
+        }
+    }
+    @media only screen and (max-width: 768px){
+        .mobileView{
+            margin-top: calc(100vh - 122px);
+            background: #fff;
+            z-index: 7;
+            padding: 12px 32px;
+
         }
     }
     

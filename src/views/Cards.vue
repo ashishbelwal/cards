@@ -7,6 +7,9 @@
                     <span>S$</span>
                     <h4>3000</h4>
                 </div>
+                <div class="hideDesktop">
+                    <img src="../assets/MLogo.svg" alt="">
+                </div>
             </div>
             <div class="cardAction">
                 <v-btn depressed to="/newCard"> <img src="../assets/box.svg" alt=""> New card </v-btn>
@@ -74,12 +77,21 @@ import DebitCard from "../components/DebitCard"
         .v-toolbar__content{
             height: 34px!important;
         }
+        .hideDesktop{
+            display: none;
+        }
         .cardHeader{
             margin-top: 59px;
             display: flex;
             align-items: end;
             justify-content: space-between;
             width: 100%;
+            @media only screen and (max-width: 768px){
+                padding: 0px 15px;
+                position: fixed;
+                z-index: 6;
+                margin-top: 30px;
+            }
             .balance{
                 .availableBalance{
                     display: flex;
@@ -140,6 +152,12 @@ import DebitCard from "../components/DebitCard"
         }
     }
     @media only screen and (max-width: 768px){
+        .hideDesktop{
+            display: block!important;
+            position: fixed;
+            top: 16px;
+            right: 20px;
+        }
         .card .v-tabs-items{
             padding: 12px 0px;
             box-shadow: none;
@@ -155,6 +173,14 @@ import DebitCard from "../components/DebitCard"
             }
         }
         .cardAction{
+                position: absolute;
+                z-index: 99;
+                width: 100%;
+                right: 5px;
+                top: 35px;
+                float: right;
+                display: flex;
+                justify-content: end;
             a{
                 background: transparent!important;
                 color: #23CEFD!important;
@@ -164,12 +190,81 @@ import DebitCard from "../components/DebitCard"
             background: #0d365a!important;
             border-color:#0d365a!important;
             box-shadow: none!important;
+            
+            .v-toolbar__extension{
+                    position: fixed;
+                    z-index: 2;
+                    top: 106px;
+                    width: max-content;
+                    left: 16px;
+            }
+            
         }
         .v-tab.v-tab{
             color: #fff!important;
         }
         .card .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active), .card .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) > .v-icon, .card .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) > .v-btn, .card .theme--light.v-tabs > .v-tabs-bar .v-tab--disabled{
             color: rgba(255, 255, 255, 1.5)
+        }
+        .v-card header{
+            padding: 0px 16px;
+            position: fixed;
+            z-index: 3;
+        }
+        .v-card > *:last-child:not(.v-btn):not(.v-chip):not(.v-avatar){
+            background: #0d365a;
+            margin: 0;
+        }
+        .showCardBtn{
+            .v-btn{
+                background: #fff;
+                padding: 0px 10px!important;
+            }
+        }
+        .cardSider{
+            margin-top: -7px;
+        }
+        .sideContainer{
+            position: fixed;
+            left: 0;
+            padding: 40px;
+            top: 130px;
+        }
+        .cardSider .card{
+            padding:24px;
+            min-height: 218px;
+            .cardName{
+                margin-top: 24px;
+                padding-top: 0;
+                font-size: 22px;
+            }
+            .cardNumber{
+                margin-top: 24px;
+                padding-top: 0;
+            }
+            .othersDetails{
+                font-size: 13px;
+            }
+        }
+        .v-carousel__controls{
+            bottom: 54px;
+        }
+        .cardSider::after{
+            content: "";
+            position: fixed;
+            height: 200px;
+            width: 100%;
+            border-radius: 12px;
+            background: #536DFF;
+            left: 96%;
+            top: 210px;
+            opacity: .5;
+        }
+        .shortDetail{
+            padding-left: 20px;
+        }
+        .amount h3{
+            font-size: 14px;
         }
     }
 </style>
